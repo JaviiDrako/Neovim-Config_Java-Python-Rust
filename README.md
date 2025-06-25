@@ -3,7 +3,7 @@
 
 This is my personal Neovim configuration optimized for development in Java, Python, and Rust. It includes integrated LSP support, debugging UI, and various plugins to enhance productivity and editing experience.
 
-## Project Structure
+## Project Structure 🗂️
 ```
 nvim/
 ├── init.lua               # Main configuration file where plugins are loaded and core settings applied
@@ -32,14 +32,14 @@ nvim/
 ```
 
 
-## How It Works
+## How It Works ⚙️
 
 - Each plugin is configured in its own Lua file inside the `lua/plugins/` directory.
 - Core Neovim options and key mappings are defined in `lua/core/options.lua` and `lua/core/keymaps.lua`.
 - The `init.lua` file is responsible for loading core settings and setting up plugins using the Lazy.nvim plugin manager.
 - Plugins are imported and initialized by requiring their respective files in the `lazy.setup()` call inside `init.lua`.
 
-## How and Where to Make Changes
+## How and Where to Make Changes ✍️
 
 - **Options and Keymaps:**  
   Modify general Neovim settings in `lua/core/options.lua` and custom key mappings in `lua/core/keymaps.lua`.
@@ -68,7 +68,7 @@ require('plugins.example-plugin'),
 ```
 
 
-## Features
+## Features ✨
 
 - Language Server Protocol (LSP) support for Java, Python, and Rust.
 - Debugger UI integration for streamlined debugging.
@@ -76,7 +76,7 @@ require('plugins.example-plugin'),
 - Smooth cursor effects and visible indentation guides.
 - Snippet support and autocompletion.
 
-## Installation
+## Installation 📥
 
 1. Clone this repository into your Neovim configuration directory (usually `~/.config/nvim`).
 2. Open Neovim, and Lazy.nvim will automatically install and set up the plugins.
