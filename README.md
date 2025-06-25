@@ -81,3 +81,6 @@ require('plugins.example-plugin'),
 1. Clone this repository into your Neovim configuration directory (usually `~/.config/nvim`).
 2. Open Neovim, and Lazy.nvim will automatically install and set up the plugins.
 3. Customize keymaps and options as needed in the `lua/core/` directory.
+---
+
+Thanks for checking out the repo! ⭐ If you found it helpful or interesting, consider giving it a star on GitHub.
