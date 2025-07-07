@@ -1,10 +1,19 @@
+-- My lsp config
 
--- My lsp config with capabilities and on_attach
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 local java = require("java")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+
+local home = os.getenv("HOME") or vim.fn.expand("~")
+-- Here is java version config if you have the same directory path you can just change the file           ↴ 
+local java_bin = os.getenv("JAVA_HOME") and (os.getenv("JAVA_HOME") .. "/bin/java") or "/usr/lib/jvm/java-17-openjdk-amd64/bin/java"
+local jdtls_path = home .. "/.local/share/nvim/mason/packages/jdtls"
+local launcher_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar")
+local config_dir = jdtls_path .. "/config_linux"
+local workspace_dir = home .. "/.cache/jdtls-workspace"
 
 -- Mason Setup
 mason.setup()
@@ -22,7 +31,33 @@ mason_lspconfig.setup({
 java.setup()
 
 -- Set lspconfig
-lspconfig.jdtls.setup({})
+lspconfig.jdtls.setup({
+  cmd = {
+    -- Path to Java executable. Uses JAVA_HOME if set, otherwise defaults to system path.
+    java_bin,
+
+    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+    "-Dosgi.bundles.defaultStartLevel=4",
+    "-Declipse.product=org.eclipse.jdt.ls.core.product",
+    "-Dlog.protocol=true",
+    "-Dlog.level=ALL",
+    "-Xms1g",
+    "--add-modules=ALL-SYSTEM",
+    "--add-opens", "java.base/java.util=ALL-UNNAMED",
+    "--add-opens", "java.base/java.lang=ALL-UNNAMED",
+
+    -- Path to JDTLS launcher JAR. Automatically finds the correct version.
+    "-jar", launcher_jar,
+
+    -- Path to JDTLS config directory (change if on a different OS).
+    "-configuration", config_dir,
+
+    -- Path to workspace directory (can be customized).
+    "-data", workspace_dir,
+  },
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
 
 -- Capabilities and on_attach
 local capabilities = cmp_nvim_lsp.default_capabilities()
